@@ -1,0 +1,103 @@
+{
+    "type": "message",
+    "attachments": [{
+        "contentType": "application/vnd.microsoft.card.adaptive",
+        "contentUrl": "null",
+        "content": {
+            "$schema": "http://adaptivecards.io/schemas/adaptive",
+            "type": "AdaptiveCard",
+            "version": "1.2",
+            "body": [
+                    {
+                        "type": "ColumnSet",
+                        "columns": [
+                            {
+                                "type": "Column",
+                                "width": "stretch",
+                                "items": [
+                                    {
+                                        "type": "TextBlock",
+                                        "text": "Ticket: "+send_json["number"],
+                                        "id": "acTicket",
+                                        "spacing": "None",
+                                        "horizontalAlignment": "Left",
+                                        "size": "Large",
+                                        "weight": "Bolder",
+                                        "color": "Accent",
+                                        "style": "heading",
+                                        "fontType": "Default"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Column",
+                                "width": "stretch",
+                                "items": [
+                                    {
+                                        "type": "Image",
+                                        "url": "https://liquipedia.net/commons/images/e/e7/TOPdesk_allmode.png",
+                                        "size": "Large",
+                                        "horizontalAlignment": "Right",
+                                        "height": "25px",
+                                        "selectAction": {
+                                            "type": "Action.OpenUrl",
+                                            "url": "https://<!!!!!>.topdesk.net/tas/secure/login/form",
+                                            "title": "Go to TopDesk"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "TextBlock",
+                        "text": send_json["callerBranch"]["name"] + " | " + send_json["briefDescription"],
+                        "weight": "Lighter",
+                        "size": "Large",
+                        "spacing": "Medium",
+                        "wrap": "true",
+                        "id": "acTitle",
+                        "separator": "true",
+                        "horizontalAlignment": "Center",
+                        "maxLines": 0,
+                        "isSubtle": "true",
+                        "fontType": "Default"
+                    },
+                    {
+                        "type": "FactSet",
+                        "facts": [
+                            {
+                                "title": "Status",
+                                "value": send_json["processingStatus"]["name"]
+                            },
+                            {
+                                "title": "Solicitante",
+                                "value": send_json["caller"]["dynamicName"]
+                            },
+                            {
+                                "title": "Operador",
+                                "value": send_json["operator"]["name"]
+                            },
+                            {
+                                "title": "Data de Abertura",
+                                "value": send_json["creationDate"]
+                            },
+                            {
+                                "title": "Vencimento em",
+                                "value": send_json["targetDate"]
+                            }
+                        ],
+                        "height": "stretch",
+                        "separator": "true"
+                    },
+                    {
+                        "type": "TextBlock",
+                        "text": send_json["request"],
+                        "id": "acInstructions",
+                        "wrap": "true",
+                        "separator": "true"
+                    }
+                ]
+            }
+    }]
+}
